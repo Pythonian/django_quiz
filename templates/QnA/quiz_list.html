@@ -1,0 +1,40 @@
+{% extends 'QnA/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "All Quizzes" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "Welcome to SupportTheNPFL Quiz" %}</h2>
+<p>{% trans "This is to test your knowledge of the NPFL" %}</p>
+<p>{% trans "Have Fun!!!" %}</p>
+<h3>The available Quizzes to take are below :::</h3>
+    {% if quiz_list %}
+		<table class="table table-bordered table-striped">
+		  <thead>
+			<tr>
+			  <th>{% trans "Title" %}</th>
+			  <th>{% trans "Description" %}</th>
+			  <th></th>
+			</tr>
+		  </thead>
+
+		  <tbody>
+
+        {% for quiz in quiz_list %}
+  			<tr>
+			  <td>{{ quiz.title }}</td>
+			  <td>{{ quiz.description }}</td>
+			  <td>
+				<a href="{% url 'quiz_question' quiz_name=quiz.url %}">
+				  {% trans "Start Quiz" %}
+				</a>
+			</tr>
+
+        {% endfor %}
+		  </tbody>
+
+		</table>
+
+	{% else %}
+        <p>{% trans "There are no available quizzes" %}.</p>
+    {% endif %}
+{% endblock %}
